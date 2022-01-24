@@ -6,6 +6,9 @@ target/
 .DS_Store
 .mvn/
 
+#### Astra ####
+secure-connect-inbox-app.zip
+
 ### STS ###
 .apt_generated
 .classpath
