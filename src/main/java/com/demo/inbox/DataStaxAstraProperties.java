@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo.inbox;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
