@@ -1,5 +1,6 @@
 package com.demo.inbox.folder;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
@@ -8,6 +9,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table(value = "folders_by_user")
 @Data
+@AllArgsConstructor
 public class Folder {
 
     //ordinal is the order of column in primary key

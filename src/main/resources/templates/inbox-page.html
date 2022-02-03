@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,5 +11,9 @@
 </head>
 <body>
 <h1>Inbox</h1>
+    <div th:each="folder : ${userFolders}">
+        <p th:text="${folder.label}"></p>
+    </div>
+
 </body>
 </html>
