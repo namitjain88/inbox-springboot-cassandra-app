@@ -1,6 +1,7 @@
 package com.demo.inbox.emaillist;
 
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -25,4 +26,7 @@ public class EmailListItem {
     @Column(value = "is_read")
     @CassandraType(type = Name.BOOLEAN)
     private boolean isRead;
+
+    @Transient
+    private String agoTimeString;
 }
