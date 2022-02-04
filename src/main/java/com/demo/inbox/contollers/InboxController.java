@@ -1,5 +1,7 @@
 package com.demo.inbox.contollers;
 
+import com.demo.inbox.emaillist.EmailItemListRepository;
+import com.demo.inbox.emaillist.EmailListItem;
 import com.demo.inbox.folder.Folder;
 import com.demo.inbox.folder.FolderRepository;
 import com.demo.inbox.folder.FolderService;
@@ -22,18 +24,27 @@ public class InboxController {
     @Autowired
     private FolderService folderService;
 
+    @Autowired
+    private EmailItemListRepository emailItemListRepository;
+
     @GetMapping("/")
-    public String homePage(@AuthenticationPrincipal OAuth2User principal, Model model){
-        if(principal == null || !StringUtils.hasText(principal.getAttribute("name"))){
+    public String homePage(@AuthenticationPrincipal OAuth2User principal, Model model) {
+        if (principal == null || !StringUtils.hasText(principal.getAttribute("name"))) {
             return "index";
         }
 
+        // fetch folders by user
         String userId = principal.getAttribute("login");
         List<Folder> userFolders = folderRepository.findAllByUserId(userId);
         model.addAttribute("userFolders", userFolders);
 
         List<Folder> defaultFolders = folderService.getDefaultFolders(userId);
         model.addAttribute("defaultFolders", defaultFolders);
+
+        // fetch emailList by user and folder
+        String folderLabel = "Inbox";
+        List<EmailListItem> emailList = emailItemListRepository.findAllByKey_UserIdAndKey_Label(userId, folderLabel);
+        model.addAttribute("emailList", emailList);
 
         return "inbox-page";
     }
