@@ -17,7 +17,7 @@ public class EmailListItem {
     @PrimaryKey
     private EmailListItemKey key;
 
-    @CassandraType(type = Name.TEXT, typeArguments = Name.TEXT)
+    @CassandraType(type = Name.LIST, typeArguments = Name.TEXT)
     private List<String> to;
 
     @CassandraType(type = Name.TEXT)
