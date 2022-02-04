@@ -1,6 +1,8 @@
 package com.demo.inbox;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
+import com.demo.inbox.email.Email;
+import com.demo.inbox.email.EmailRepository;
 import com.demo.inbox.emaillist.EmailItemListRepository;
 import com.demo.inbox.emaillist.EmailListItem;
 import com.demo.inbox.emaillist.EmailListItemKey;
@@ -49,6 +51,9 @@ public class InboxApp {
     @Autowired
     private EmailItemListRepository emailItemListRepository;
 
+    @Autowired
+    private EmailRepository emailRepository;
+
     @PostConstruct
     public void init() {
         folderRepository.save(new Folder("namitjain88", "Inbox", "blue"));
@@ -68,6 +73,16 @@ public class InboxApp {
             emailListItem.setRead(true);
 
             emailItemListRepository.save(emailListItem);
+
+            //seeding email messages
+            Email email = new Email();
+            email.setId(key.getTimeUUID());
+            email.setFrom(key.getUserId());
+            email.setTo(emailListItem.getTo());
+            email.setSubject(emailListItem.getSubject());
+            email.setBody("Body " + i);
+
+            emailRepository.save(email);
         }
     }
 }
