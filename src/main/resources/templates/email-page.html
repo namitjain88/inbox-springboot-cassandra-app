@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <title>Title</title>
+    <meta content="" name="description"/>
+    <meta content="width=device-width" name="viewport"/>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .container {
+          display: grid;
+
+          grid-template-areas:
+            "header header header"
+            "nav content content"
+            "footer footer footer";
+
+          grid-template-columns: 200px 1fr 200px;
+          grid-template-rows: auto 1fr auto;
+          grid-gap: 10px;
+
+          height: 100vh;
+        }
+
+        header {
+          grid-area: header;
+        }
+
+        nav {
+          grid-area: nav;
+          margin-left: 0.5rem;
+        }
+
+        main {
+          grid-area: content;
+        }
+
+        aside {
+          grid-area: side;
+          margin-right: 0.5rem;
+        }
+
+        footer {
+          grid-area: footer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Hello, user</h1>
+    </header>
+
+    <nav>
+        <div th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders})"></div>
+        <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
+    </nav>
+
+    <main>
+        <div class="card">
+            <div class="card-header">View Email</div>
+            <div class="card-body">
+                <dl>
+                    <dt>From</dt>
+                    <dd th:text="${email.from}"></dd>
+                    <dt>To</dt>
+                    <dd th:text="${toIdsString}"></dd>
+                    <dt>Subject</dt>
+                    <dd th:text="${email.subject}"></dd>
+                    <dt>Body</dt>
+                    <dd th:text="${email.body}"></dd>
+                </dl>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+</div>
+
+</body>
+</html>
+</body>
+</html>

@@ -15,7 +15,7 @@ import java.util.UUID;
 @Data
 public class Email {
 
-    @Id
+    @Id //Required if primary key is made of just one column
     @PrimaryKeyColumn(name = "id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private UUID id;
 
