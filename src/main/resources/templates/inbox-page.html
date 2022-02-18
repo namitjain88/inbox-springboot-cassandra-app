@@ -49,13 +49,6 @@
           grid-area: footer;
         }
 
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -65,13 +58,14 @@
     </header>
 
     <nav>
+        <div class="card"><a href="/compose" class="btn btn-primary">Compose Message</a></div>
         <div th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders})"></div>
         <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
     </nav>
 
     <main>
         <div class="card">
-            <div class="card-header" th:text="${folderLabel}">Inbox</div>
+            <div class="card-header" th:text="${folderLabel}">Placeholder for folderLabel</div>
             <div class="card-body">
                 <div class="list-group">
                     <a th:each="message : ${emailList}"

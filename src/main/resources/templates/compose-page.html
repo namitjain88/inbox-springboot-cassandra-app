@@ -49,6 +49,14 @@
           grid-area: footer;
         }
 
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -58,27 +66,32 @@
     </header>
 
     <nav>
-        <div class="card"><a href="/compose" class="btn btn-primary">Compose Message</a></div>
         <div th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders})"></div>
         <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
     </nav>
 
     <main>
-        <div class="card">
-            <div class="card-header">View Email</div>
-            <div class="card-body">
-                <dl>
-                    <dt>From</dt>
-                    <dd th:text="${email.from}"></dd>
-                    <dt>To</dt>
-                    <dd th:text="${toIdsString}"></dd>
-                    <dt>Subject</dt>
-                    <dd th:text="${email.subject}"></dd>
-                    <dt>Body</dt>
-                    <dd th:text="${email.body}"></dd>
-                </dl>
+        <form>
+            <div class="card">
+                <div class="card-header">Create new message</div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="toIds" class="form-label">To</label>
+                        <input type="text" class="form-control" id="toIds">
+                        <div id="toIdsHelp" class="form-text">Enter comma separated Github ids.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="body" class="form-label">Body</label>
+                        <textarea class="form-control" id="body" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
-        </div>
+        </form>
     </main>
 
     <footer>
