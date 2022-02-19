@@ -49,6 +49,14 @@
           grid-area: footer;
         }
 
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -77,6 +85,13 @@
                     <dt>Body</dt>
                     <dd th:text="${email.body}"></dd>
                 </dl>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a th:href="@{'/compose?to=' + ${email.from}} + '&subject=' + ${email.subject}"
+                       class="btn btn-primary me-md-2">Reply</a>
+                    <a th:href="@{'/compose?to=' + ${email.from} + ',' + ${toIdsString}} + '&subject=' + ${email.subject}"
+                       class="btn btn-primary">Reply
+                        All</a>
+                </div>
             </div>
         </div>
     </main>

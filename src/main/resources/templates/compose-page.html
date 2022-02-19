@@ -48,15 +48,6 @@
         footer {
           grid-area: footer;
         }
-
-
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -77,12 +68,12 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="toIds" class="form-label">To</label>
-                        <input type="text" class="form-control" id="toIds">
+                        <input type="text" th:value="${toIds}" class="form-control" id="toIds">
                         <div id="toIdsHelp" class="form-text">Enter comma separated Github ids.</div>
                     </div>
                     <div class="mb-3">
                         <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject">
+                        <input type="text" th:value="${subject}" class="form-control" id="subject">
                     </div>
                     <div class="mb-3">
                         <label for="body" class="form-label">Body</label>

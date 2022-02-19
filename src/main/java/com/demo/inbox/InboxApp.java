@@ -68,7 +68,7 @@ public class InboxApp {
 
             EmailListItem emailListItem = new EmailListItem();
             emailListItem.setKey(key);
-            emailListItem.setTo(Arrays.asList("namitjain88"));
+            emailListItem.setTo(Arrays.asList("namitjain88", "abc", "xyz"));
             emailListItem.setSubject("Subject - " + i);
             emailListItem.setRead(true);
 
