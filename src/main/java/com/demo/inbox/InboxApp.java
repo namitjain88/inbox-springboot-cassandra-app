@@ -8,6 +8,8 @@ import com.demo.inbox.emaillist.EmailListItem;
 import com.demo.inbox.emaillist.EmailListItemKey;
 import com.demo.inbox.folder.Folder;
 import com.demo.inbox.folder.FolderRepository;
+import com.demo.inbox.folder.UnreadEmailCountRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -54,6 +56,9 @@ public class InboxApp {
     @Autowired
     private EmailRepository emailRepository;
 
+    @Autowired
+    private UnreadEmailCountRepository unreadEmailCountRepository;
+
     @PostConstruct
     public void init() {
         folderRepository.save(new Folder("namitjain88", "Inbox", "blue"));
@@ -70,7 +75,7 @@ public class InboxApp {
             emailListItem.setKey(key);
             emailListItem.setTo(Arrays.asList("namitjain88", "abc", "xyz"));
             emailListItem.setSubject("Subject - " + i);
-            emailListItem.setRead(true);
+            emailListItem.setRead(false);
 
             emailItemListRepository.save(emailListItem);
 
@@ -83,6 +88,9 @@ public class InboxApp {
             email.setBody("Body " + i);
 
             emailRepository.save(email);
+
+            // incremeting count in unread_email_count_by_user_folder table
+            unreadEmailCountRepository.incrementUnreadEmailCount("namitjain88", "Inbox");
         }
     }
 }
