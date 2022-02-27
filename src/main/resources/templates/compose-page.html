@@ -62,27 +62,28 @@
     </nav>
 
     <main>
-        <form>
-            <div class="card">
-                <div class="card-header">Create new message</div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="toIds" class="form-label">To</label>
-                        <input type="text" th:value="${toIds}" class="form-control" id="toIds">
-                        <div id="toIdsHelp" class="form-text">Enter comma separated Github ids.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" th:value="${subject}" class="form-control" id="subject">
-                    </div>
-                    <div class="mb-3">
-                        <label for="body" class="form-label">Body</label>
-                        <textarea class="form-control" id="body" rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+      <div class="card">
+        <div class="card-header">Create new message</div>
+        <div class="card-body">
+          <form action="#" th:action="@{/send}" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+            <div class="mb-3">
+              <label for="toIds" class="form-label">To</label>
+              <input type="text" th:value="${toIds}" class="form-control" name="toIds" id="toIds">
+              <div id="toIdsHelp" class="form-text">Enter comma separated Github ids of your recepients.</div>
             </div>
-        </form>
+            <div class="mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" th:value="${subject}" class="form-control" name="subject" id="subject">
+            </div>
+            <div class="mb-3">
+              <label for="body" class="form-label">Body</label>
+              <textarea class="form-control" name="body" id="body" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+        </div>
+      </div>
     </main>
 
     <footer>
