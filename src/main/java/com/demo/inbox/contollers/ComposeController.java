@@ -3,6 +3,7 @@ package com.demo.inbox.contollers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.demo.inbox.email.EmailService;
@@ -52,6 +53,10 @@ public class ComposeController {
 
         List<Folder> defaultFolders = folderService.getDefaultFolders(userId);
         model.addAttribute("defaultFolders", defaultFolders);
+
+        // fetch unread email counts from unread_email_count_by_user_folder
+        Map<String, Integer> folderToUnreadCounts = folderService.getFolderToUnreadCounts(userId);
+        model.addAttribute("folderToUnreadCounts", folderToUnreadCounts);
 
         model.addAttribute("toIds", String.join(", ", createListOfRecipients(to)));
 

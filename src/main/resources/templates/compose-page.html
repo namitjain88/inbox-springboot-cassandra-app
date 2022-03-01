@@ -57,8 +57,12 @@
     </header>
 
     <nav>
-        <div th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders})"></div>
-        <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
+      <div
+        th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders}, folderToUnreadCounts = ${folderToUnreadCounts})">
+      </div>
+      <div
+        th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders}, folderToUnreadCounts = ${folderToUnreadCounts})">
+      </div>
     </nav>
 
     <main>

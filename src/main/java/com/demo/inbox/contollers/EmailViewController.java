@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,6 +48,10 @@ public class EmailViewController {
 
         List<Folder> userFolders = folderRepository.findAllByUserId(userId);
         model.addAttribute("userFolders", userFolders);
+
+        // fetch unread email counts from unread_email_count_by_user_folder
+        Map<String, Integer> folderToUnreadCounts = folderService.getFolderToUnreadCounts(userId);
+        model.addAttribute("folderToUnreadCounts", folderToUnreadCounts);
 
         //fetch email by given input id
         Optional<Email> optionalEmail = emailRepository.findById(id);
