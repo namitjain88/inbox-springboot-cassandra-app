@@ -58,9 +58,13 @@
     </header>
 
     <nav>
-        <div class="card"><a href="/compose" class="btn btn-primary">Compose Message</a></div>
-        <div th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders})"></div>
-        <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
+      <div class="card"><a href="/compose" class="btn btn-primary">Compose Message</a></div>
+      <div
+        th:insert="components/folder-list :: folder-list (panelName = 'Folders', folders = ${defaultFolders}, folderToUnreadCounts = ${folderToUnreadCounts})">
+      </div>
+      <div
+        th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders}, folderToUnreadCounts = ${folderToUnreadCounts})">
+      </div>
     </nav>
 
     <main>

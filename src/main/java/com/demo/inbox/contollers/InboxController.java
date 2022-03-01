@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -46,6 +47,10 @@ public class InboxController {
 
         List<Folder> defaultFolders = folderService.getDefaultFolders(userId);
         model.addAttribute("defaultFolders", defaultFolders);
+
+        // fetch unread email counts from unread_email_count_by_user_folder
+        Map<String, Integer> folderToUnreadCounts = folderService.getFolderToUnreadCounts(userId);
+        model.addAttribute("folderToUnreadCounts", folderToUnreadCounts);
 
         if (!StringUtils.hasText(folder)) {
             folder = "Inbox";
