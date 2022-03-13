@@ -1,14 +1,13 @@
 package com.demo.inbox;
 
-import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.demo.inbox.email.Email;
-import com.demo.inbox.email.EmailRepository;
-import com.demo.inbox.emaillist.EmailItemListRepository;
-import com.demo.inbox.emaillist.EmailListItem;
-import com.demo.inbox.emaillist.EmailListItemKey;
+import java.nio.file.Path;
+import java.util.Arrays;
+
+import javax.annotation.PostConstruct;
+
+import com.demo.inbox.email.EmailService;
 import com.demo.inbox.folder.Folder;
 import com.demo.inbox.folder.FolderRepository;
-import com.demo.inbox.folder.UnreadEmailCountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -19,10 +18,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.PostConstruct;
-import java.nio.file.Path;
-import java.util.Arrays;
 
 @SpringBootApplication
 @RestController
@@ -51,46 +46,16 @@ public class InboxApp {
     private FolderRepository folderRepository;
 
     @Autowired
-    private EmailItemListRepository emailItemListRepository;
-
-    @Autowired
-    private EmailRepository emailRepository;
-
-    @Autowired
-    private UnreadEmailCountRepository unreadEmailCountRepository;
+    private EmailService emailService;
 
     @PostConstruct
     public void init() {
-        folderRepository.save(new Folder("namitjain88", "Inbox", "blue"));
-        folderRepository.save(new Folder("namitjain88", "Sent", "green"));
-        folderRepository.save(new Folder("namitjain88", "Important", "yellow"));
+        folderRepository.save(new Folder("namitjain88", "Work", "blue"));
+        folderRepository.save(new Folder("namitjain88", "Personal", "green"));
+        folderRepository.save(new Folder("namitjain88", "Family", "yellow"));
 
         for (int i = 0; i < 10; i++) {
-            EmailListItemKey key = new EmailListItemKey();
-            key.setUserId("namitjain88");
-            key.setLabel("Inbox");
-            key.setTimeUUID(Uuids.timeBased());
-
-            EmailListItem emailListItem = new EmailListItem();
-            emailListItem.setKey(key);
-            emailListItem.setTo(Arrays.asList("namitjain88", "abc", "xyz"));
-            emailListItem.setSubject("Subject - " + i);
-            emailListItem.setRead(false);
-
-            emailItemListRepository.save(emailListItem);
-
-            //seeding email messages
-            Email email = new Email();
-            email.setId(key.getTimeUUID());
-            email.setFrom(key.getUserId());
-            email.setTo(emailListItem.getTo());
-            email.setSubject(emailListItem.getSubject());
-            email.setBody("Body " + i);
-
-            emailRepository.save(email);
-
-            // incremeting count in unread_email_count_by_user_folder table
-            unreadEmailCountRepository.incrementUnreadEmailCount("namitjain88", "Inbox");
+            emailService.sendEmail("namitjain88", Arrays.asList("namitjain88", "abc", "xyz"), "Subject " + i, "Body " + i);
         }
     }
 }
