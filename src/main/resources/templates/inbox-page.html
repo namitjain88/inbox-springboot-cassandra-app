@@ -74,6 +74,7 @@
                 <div class="list-group">
                     <a th:each="message : ${emailList}"
                        class="list-group-item list-group-item-action"
+                       th:classappend="${message.isRead ? '' : 'list-group-item-dark'}"
                        th:href="@{'/emails/' + ${message.key.timeUUID}} + '?label=' + ${{folderLabel}}">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1" th:text="${message.subject}">Placeholder for message.subject</h5>
